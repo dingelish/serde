@@ -21,6 +21,7 @@
 //! }
 //! ```
 
+use std::prelude::v1::*;
 use lib::*;
 
 use self::private::{First, Second};

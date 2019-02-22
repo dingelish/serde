@@ -19,6 +19,7 @@ appveyor = { repository = "serde-rs/serde" }
 
 [dependencies]
 serde_derive = { version = "1.0", optional = true, path = "../serde_derive" }
+sgx_tstd = { version = "1.0", optional = true }
 
 [dev-dependencies]
 serde_derive = { version = "1.0", path = "../serde_derive" }
@@ -58,3 +59,8 @@ alloc = ["unstable"]
 # does not preserve identity and may result in multiple copies of the same data.
 # Be sure that this is what you want before enabling this feature.
 rc = []
+
+# Supports rust-sgx-sdk using Cargo and `sgx_tstd as std`.
+# This feature turns the crate into a `no_std` crate and adds sgx_tstd to replace
+# the default libstd.
+mesalock_sgx_cargo = ["sgx_tstd"]

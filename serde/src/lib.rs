@@ -118,6 +118,13 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+#![cfg_attr(feature = "mesalock_sgx_cargo", no_std)]
+#![cfg_attr(all(target_env = "sgx", target_vendor = "mesalock"), feature(rustc_private))]
+
+#[cfg(feature = "mesalock_sgx_cargo")]
+#[macro_use]
+extern crate sgx_tstd as std;
+
 #[cfg(feature = "alloc")]
 extern crate alloc;
 
@@ -197,8 +204,10 @@ mod lib {
     pub use std::num::Wrapping;
     #[cfg(feature = "std")]
     pub use std::path::{Path, PathBuf};
-    #[cfg(feature = "std")]
+    #[cfg(all(feature = "std", not(all(target_env = "sgx", target_vendor = "mesalock")), not(feature = "mesalock_sgx_cargo")))]
     pub use std::sync::{Mutex, RwLock};
+    #[cfg(all(feature = "std", any(all(target_env = "sgx", target_vendor = "mesalock"), feature = "mesalock_sgx_cargo")))]
+    pub use std::sync::{SgxMutex as Mutex, SgxRwLock as RwLock};
     #[cfg(feature = "std")]
     pub use std::time::{SystemTime, UNIX_EPOCH};
 

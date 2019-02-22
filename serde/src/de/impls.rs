@@ -1,3 +1,8 @@
+use std::prelude::v1::*;
+#[cfg(all(feature = "std",
+          any(feature = "mesalock_sgx_cargo",
+              all(target_env = "sgx", target_vendor = "mesalock"))))]
+use std::sync::{SgxMutex as Mutex, SgxRwLock as RwLock};
 use lib::*;
 
 use de::{
