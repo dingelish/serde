@@ -2,4 +2,6 @@
 members = [
     "serde",
     "serde_derive",
+    "serde-sgx-test/app",
+    "serde-sgx-test/enclave",
 ]
