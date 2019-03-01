@@ -75,7 +75,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // Serde types in rustdoc of other crates get linked to here.
-#![doc(html_root_url = "https://docs.rs/serde/1.0.88")]
+#![doc(html_root_url = "https://docs.rs/serde/1.0.89")]
 // Support using Serde without the standard library!
 #![cfg_attr(not(feature = "std"), no_std)]
 // Unstable functionality only if the user asks for it. For tracking and
@@ -211,17 +211,20 @@ mod lib {
     #[cfg(feature = "std")]
     pub use std::time::{SystemTime, UNIX_EPOCH};
 
-    #[cfg(any(core_duration, feature = "std"))]
-    pub use self::core::time::Duration;
+    #[cfg(all(feature = "std", collections_bound))]
+    pub use std::collections::Bound;
+
+    #[cfg(core_reverse)]
+    pub use self::core::cmp::Reverse;
+
+    #[cfg(ops_bound)]
+    pub use self::core::ops::Bound;
 
     #[cfg(range_inclusive)]
     pub use self::core::ops::RangeInclusive;
 
-    #[cfg(all(feature = "std", collections_bound))]
-    pub use std::collections::Bound;
-
-    #[cfg(ops_bound)]
-    pub use self::core::ops::Bound;
+    #[cfg(any(core_duration, feature = "std"))]
+    pub use self::core::time::Duration;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
