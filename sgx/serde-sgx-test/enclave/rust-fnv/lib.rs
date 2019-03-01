@@ -68,8 +68,6 @@
 
 extern crate sgx_tstd as std;
 
-use std::prelude::v1::*;
-
 use std::default::Default;
 use std::hash::{Hasher, BuildHasherDefault};
 use std::collections::{HashMap, HashSet};

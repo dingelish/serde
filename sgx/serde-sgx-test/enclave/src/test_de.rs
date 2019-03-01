@@ -16,9 +16,6 @@ use fnv::FnvHasher;
 use serde::{Deserialize, Deserializer};
 use serde_test::{assert_de_tokens, assert_de_tokens_error, Configure, Token};
 
-#[macro_use]
-use macros;
-
 //////////////////////////////////////////////////////////////////////////
 
 #[derive(Copy, Clone, PartialEq, Debug, Deserialize)]
