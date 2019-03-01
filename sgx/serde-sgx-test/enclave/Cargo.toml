@@ -11,7 +11,7 @@ crate-type = ["staticlib"]
 default = []
 
 [dependencies]
-serde = { path = "../../serde", features = ["mesalock_sgx_cargo"] }
+serde = { path = "../../serde", features = ["mesalock_sgx_cargo", "rc", "unstable"] }
 serde_derive = { path = "../../serde_derive" }
 serde_test = { path = "../../serde_test", features = ["mesalock_sgx_cargo"] }
 fnv = { path = "rust-fnv" }
