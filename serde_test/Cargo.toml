@@ -11,8 +11,13 @@ keywords = ["serde", "serialization"]
 readme = "crates-io.md"
 include = ["Cargo.toml", "src/**/*.rs", "crates-io.md", "README.md", "LICENSE-APACHE", "LICENSE-MIT"]
 
+[features]
+default = []
+mesalock_sgx_cargo = []
+
 [dependencies]
-serde = { version = "1.0.60", path = "../serde" }
+serde = { version = "1.0.60", path = "../serde", features = ["mesalock_sgx_cargo"]}
+sgx_tstd = "1.0"
 
 [dev-dependencies]
 serde = { version = "1.0", path = "../serde" }
