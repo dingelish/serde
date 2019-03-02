@@ -1,0 +1,88 @@
+kind: pipeline
+name: serde-sgx-1604
+
+steps:
+- name: sim-compile
+  image: baiduxlab/sgx-rust:1604-1.0.5
+  commands:
+  - . /opt/sgxsdk/environment
+  - . /root/.cargo/env
+  - /opt/intel/libsgx-enclave-common/aesm/aesm_service
+  - SGX_MODE=SW make -C sgx/serde-sgx-test
+
+- name: sim-test
+  image: baiduxlab/sgx-rust:1604-1.0.5
+  commands:
+  - . /opt/sgxsdk/environment
+  - cd sgx/serde-sgx-test/bin && ./app
+
+- name: hw-compile
+  image: baiduxlab/sgx-rust:1604-1.0.5
+  commands:
+  - . /opt/sgxsdk/environment
+  - . /root/.cargo/env
+  - make -C sgx/serde-sgx-test clean
+  - make -C sgx/serde-sgx-test
+
+- name: hw-test
+  image: baiduxlab/sgx-rust:1604-1.0.5
+  volumes:
+  - name: isgx
+    path: /dev/isgx
+  - name: aesmd
+    path: /var/run/aesmd/aesm.socket
+  commands:
+  - . /opt/sgxsdk/environment
+  - ls -l /dev/isgx
+  - ls -l /var/run/aesmd/aesm.socket
+  - cd sgx/serde-sgx-test/bin && ./app
+
+kind: pipeline
+name: serde-sgx-1804
+
+steps:
+- name: sim-compile
+  image: baiduxlab/sgx-rust:1804-1.0.5
+  commands:
+  - . /opt/sgxsdk/environment
+  - . /root/.cargo/env
+  - /opt/intel/libsgx-enclave-common/aesm/aesm_service
+  - SGX_MODE=SW make -C sgx/serde-sgx-test
+
+- name: sim-test
+  image: baiduxlab/sgx-rust:1804-1.0.5
+  commands:
+  - . /opt/sgxsdk/environment
+  - cd sgx/serde-sgx-test/bin && ./app | tee result.txt && grep " 0 failed" result.txt
+
+- name: hw-compile
+  image: baiduxlab/sgx-rust:1804-1.0.5
+  commands:
+  - . /opt/sgxsdk/environment
+  - . /root/.cargo/env
+  - make -C sgx/serde-sgx-test clean
+  - make -C sgx/serde-sgx-test
+
+- name: hw-test
+  image: baiduxlab/sgx-rust:1804-1.0.5
+  volumes:
+  - name: isgx
+    path: /dev/isgx
+  - name: aesmd
+    path: /var/run/aesmd/aesm.socket
+  commands:
+  - . /opt/sgxsdk/environment
+  - ls -l /dev/isgx
+  - ls -l /var/run/aesmd/aesm.socket
+  - cd sgx/serde-sgx-test/bin && ./app
+volumes:
+- name: isgx
+  host:
+    path: /dev/isgx
+- name: aesmd
+  host:
+    path: /var/run/aesmd/aesm.socket
+
+node:
+  instance: sgx
+
