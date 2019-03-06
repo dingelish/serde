@@ -1,0 +1,7 @@
+version: "1"
+rules:
+  - base: master
+    upstream: serde-rs:master
+    mergeMethod: hardreset
+    autoMerge: true
+    autoMergeHardReset: true
