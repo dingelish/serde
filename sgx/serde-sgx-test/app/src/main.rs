@@ -121,7 +121,7 @@ fn main() {
         },
         Err(x) => {
             println!("[-] Init Enclave Failed {}!", x.as_str());
-            return;
+            std::process::exit(x as i32);
         },
     };
 
