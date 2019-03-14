@@ -1,3 +1,5 @@
+# This is a ported version for Serde works with rust-sgx-sdk in Cargo mode
+
 # Serde &emsp; [![Build Status]][travis] [![Latest Version]][crates.io] [![Rustc Version 1.13+]][rustc]
 
 [Build Status]: https://api.travis-ci.org/serde-rs/serde.svg?branch=master
