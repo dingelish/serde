@@ -1,4 +1,7 @@
-# This is a ported version for Serde works with rust-sgx-sdk in Cargo mode
+# This is a ported version for Serde works with rust-sgx-sdk
+
+* master branch works with Cargo only
+* xargo branch works with Xargo only
 
 # Serde &emsp; [![Build Status]][travis] [![Latest Version]][crates.io] [![Rustc Version 1.13+]][rustc]
 
