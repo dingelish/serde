@@ -3,3 +3,6 @@ rules:
   - base: master
     upstream: serde-rs:master
     mergeMethod: none
+  - base: xargo 
+    upstream: serde-rs:master
+    mergeMethod: none
